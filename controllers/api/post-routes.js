@@ -77,6 +77,8 @@ router.post('/', (req, res) => {
     });
 });
 
+// PUT a post
+
 // DELETE a post
 router.delete('/:id', (req, res) => {
   Post.destroy({
