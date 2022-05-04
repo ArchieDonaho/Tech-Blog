@@ -7,16 +7,16 @@
       <input type='text' id='title' name='title' />
     </div>
     <div>
-      <label for='url'>Link</label>
-      <input id='url' name='url' />
+      <label for='content'></label>
+      <input id='content' name='content' />
     </div>
-    <button type='submit' class='btn'>Create</button>
+    <button type='submit' class='btn'>Post</button>
   </form>
 </section>
 {{!-- display any posts from the user --}}
 {{#if posts.length}}
 <section>
-  <h2>Your Posts</h2>
+  <h2>Your Posts:</h2>
   <ol>
     {{#each posts as |post|}}
     <li>
