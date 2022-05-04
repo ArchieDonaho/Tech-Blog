@@ -4,16 +4,33 @@ const routes = require('./controllers');
 const sequelize = require('./config/connection');
 
 // sessions
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 // handlebars
 const path = require('path');
 const exphbs = require('express-handlebars');
 const helpers = require('./utils/helpers');
 
+//use environment variables created in the .env file
+require('dotenv').config();
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
 // create sessions object
+const sess = {
+  secret: process.env.SECRET,
+  cookie: {
+    // session expires after a set time of inactivity
+    expires: 90000,
+  },
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
+};
 
 // create handlebars object
 const hbs = exphbs.create({
@@ -21,6 +38,7 @@ const hbs = exphbs.create({
 });
 
 // set up sessions
+app.use(session(sess));
 
 // set handlebars as teh default template engine
 app.engine('handlebars', hbs.engine);

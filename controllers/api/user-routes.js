@@ -45,15 +45,14 @@ router.post('/', (req, res) => {
     password: req.body.password,
   })
     .then((dbUserData) => {
-      // //access the session information
-      // req.session.save(() => {
-      //   req.session.user_id = dbdbUserData.id;
-      //   req.session.username = dbdbUserData.username;
-      //   req.session.loggedIn = true;
+      //access the session information
+      req.session.save(() => {
+        req.session.user_id = dbdbUserData.id;
+        req.session.username = dbdbUserData.username;
+        req.session.loggedIn = true;
 
-      //   res.json(dbdbUserData);
-      // });
-      res.json(dbUserData);
+        res.json({ user: dbUserData, message: 'You are now logged in' });
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -62,6 +61,32 @@ router.post('/', (req, res) => {
 });
 
 // Login
+router.post('/login', (req, res) => {
+  User.findOne({
+    where: {
+      email: req.body.email,
+    },
+  }).then((dbUserData) => {
+    if (!dbUserData) {
+      res.status(400).json({ message: 'No user with that email adress' });
+      return;
+    }
+    // verify the user using the instance method
+    const isValid = dbUserData.checkPassword(req.body.password);
+    if (!isValid) {
+      res.status(400).json({ message: 'Incorrect password' });
+      return;
+    }
+    // declare and save the session
+    req.session.save(() => {
+      req.session.user_id = dbUserData.id;
+      req.session.username = dbUserData.username;
+      req.session.loggedIn = true;
+
+      res.json({ user: dbUserData, message: 'You are now logged in' });
+    });
+  });
+});
 
 // logout
 

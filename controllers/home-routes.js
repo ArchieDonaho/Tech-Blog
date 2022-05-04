@@ -25,10 +25,7 @@ router.get('/', (req, res) => {
     .then((dbPostData) => {
       // serialize the data and send it to the homepage
       const posts = dbPostData.map((post) => post.get({ plain: true }));
-      res.render('homepage', {
-        posts,
-        // loggedIn: req.session.loggedIn
-      });
+      res.render('homepage', { posts, loggedIn: req.session.loggedIn });
     })
     .catch((err) => {
       console.log(err);
@@ -65,10 +62,7 @@ router.get('/post/:id', (req, res) => {
       }
       // serialize the data and send it to the sinple post page
       const post = dbPostData.get({ plain: true });
-      res.render('single-post', {
-        post,
-        // loggedIn: req.session.loggedIn
-      });
+      res.render('single-post', { post, loggedIn: req.session.loggedIn });
     })
     .catch((err) => {
       console.log(err);
@@ -78,14 +72,16 @@ router.get('/post/:id', (req, res) => {
 
 // render the login page if the user is not logged in
 router.get('/login', (req, res) => {
-  // if (!req.session.loggedIn) {
-  res.render('login');
-  // }
+  if (!req.session.loggedIn) {
+    res.render('login');
+  }
 });
 
 // render the signup page
 router.get('/signup', (req, res) => {
-  res.render('signup');
+  if (!req.session.loggedIn) {
+    res.render('signup');
+  }
 });
 
 module.exports = router;

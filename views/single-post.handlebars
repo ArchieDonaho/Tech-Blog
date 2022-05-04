@@ -1,6 +1,6 @@
 {{> post-info post}}
 {{! generate the comment textbox if the user is logged in }}
-{{!-- {{#if loggedIn}} --}}
+{{#if loggedIn}}
   <form>
     <div>
       <textarea name='comment-body'></textarea>
@@ -9,6 +9,6 @@
       <button type='submit'>add comment</button>
     </div>
   </form>
-{{!-- {{/if}} --}}
+{{/if}}
 {{!-- list all comments --}}
 {{> comments post.comments}}
