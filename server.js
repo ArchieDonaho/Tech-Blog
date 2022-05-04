@@ -33,9 +33,7 @@ const sess = {
 };
 
 // create handlebars object
-const hbs = exphbs.create({
-  // helpers
-});
+const hbs = exphbs.create({ helpers });
 
 // set up sessions
 app.use(session(sess));
