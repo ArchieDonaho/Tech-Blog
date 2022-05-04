@@ -1,6 +1,6 @@
 //import model class and datatypes object
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('');
+const sequelize = require('../config/connection');
 
 // create comment model
 class Comment extends Model {}
@@ -15,16 +15,14 @@ Comment.init(
       autoIncrement: true,
     },
     user_id: {
-      type: DataTypes,
-      INTEGER,
+      type: DataTypes.INTEGER,
       references: {
         model: 'user',
         key: 'id',
       },
     },
     post_id: {
-      type: DataTypes,
-      INTEGER,
+      type: DataTypes.INTEGER,
       references: {
         model: 'post',
         key: 'id',
