@@ -1,0 +1,30 @@
+<article>
+
+  <h1>
+    Edit Post
+  </h1>
+
+  <form id='edit-post-form'>
+    <div>
+      <h2>Title</h2>
+      <input name='post-title' type='text' value='{{post.title}}' />
+    </div>
+
+    <div>
+      <h2>Content</h2>
+      <input name='post-content' type='text' value='{{post.content}}' />
+    </div>
+
+    <div>
+      Posted on
+      {{post.created_at}}
+    </div>
+
+    <button type='submit'>Save post</button>
+    <button type='button' id='delete-post-btn'>Delete post</button>
+  </form>
+
+</article>
+<script src='/javascript/edit-post.js'></script>
+{{!-- <script src="/javascript/delete-post.js"></script>
+<script src="/javascript/comment.js"></script> }} --}}
