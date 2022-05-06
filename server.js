@@ -20,7 +20,7 @@ const PORT = process.env.PORT || 3001;
 
 // create sessions object
 const sess = {
-  secret: 'secretsecret',
+  secret: process.env.SECRET,
   cookie: {
     // session expires after a set time of inactivity
     expires: 990000,
