@@ -26,15 +26,15 @@
 {{!-- display any posts from the user --}}
 {{#if posts.length}}
 <section>
-  <h2>Your Posts:</h2>
-  <ol>
+  <h1 class='title is-3'>Your Posts:</h1>
+  <ul >
     {{#each posts as |post|}}
     <li>
       {{> post-info post}}
-      <small><a class="button" href="/dashboard/edit/{{post.id}}">Edit post</a></small>
+      <small><a class="button  is-link" href="/dashboard/edit/{{post.id}}">Edit post</a></small>
     </li><br>
     {{/each}}
-  </ol>
+  </ul>
 </section>
 {{/if}}
 <script src="/javascript/add-post.js"></script>
