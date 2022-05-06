@@ -6,25 +6,6 @@ async function signupFormHandler(event) {
   const email = document.querySelector('#email').value.trim();
   const password = document.querySelector('#password').value.trim();
 
-  // if (username && email && password) {
-  //   const response = await fetch('/api/users', {
-  //     method: 'post',
-  //     body: JSON.stringify({
-  //       username,
-  //       email,
-  //       password,
-  //     }),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   });
-  //   if (response.ok) {
-  //     document.location.replace('/dashboard');
-  //   } else {
-  //     alert(response.statusText);
-  //   }
-  // }
-
   if (username && email && password) {
     const response = await fetch('/api/users', {
       method: 'post',
@@ -35,7 +16,6 @@ async function signupFormHandler(event) {
       }),
       headers: { 'Content-Type': 'application/json' },
     });
-    //check response status
     if (response.ok) {
       document.location.replace('/dashboard');
     } else {

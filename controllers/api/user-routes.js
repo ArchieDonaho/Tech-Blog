@@ -39,20 +39,21 @@ router.get('/:id', (req, res) => {
 });
 
 // signup
-router.post('/', withAuth, (req, res) => {
+router.post('/', (req, res) => {
   User.create({
     username: req.body.username,
     email: req.body.email,
     password: req.body.password,
   })
     .then((dbUserData) => {
-      //access the session information
+      //save the session information
+      userData = dbUserData.get({ plain: true });
       req.session.save(() => {
-        req.session.user_id = dbdbUserData.id;
-        req.session.username = dbdbUserData.username;
+        req.session.user_id = userData.id;
+        req.session.username = userData.username;
         req.session.loggedIn = true;
 
-        res.json({ user: dbUserData, message: 'You are now logged in' });
+        res.json({ user: userData, message: 'You are now logged in' });
       });
     })
     .catch((err) => {
