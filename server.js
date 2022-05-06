@@ -32,13 +32,13 @@ const sess = {
   }),
 };
 
-// create handlebars object
-const hbs = exphbs.create({ helpers });
-
 // set up sessions
 app.use(session(sess));
 
-// set handlebars as teh default template engine
+// create handlebars object
+const hbs = exphbs.create({ helpers });
+
+// set handlebars as the default template engine
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
