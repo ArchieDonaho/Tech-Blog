@@ -38,7 +38,7 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// POST a new user
+// signup
 router.post('/', withAuth, (req, res) => {
   User.create({
     username: req.body.username,

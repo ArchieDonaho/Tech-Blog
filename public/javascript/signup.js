@@ -1,24 +1,41 @@
 // handle new user signup
-async function submitFormHandler(event) {
+async function signupFormHandler(event) {
   event.preventDefault();
 
-  const username = $('#username').val().trim();
-  const email = $('#email').val().trim();
-  const password = $('#password').val().trim();
+  const username = document.querySelector('#username').value.trim();
+  const email = document.querySelector('#email').value.trim();
+  const password = document.querySelector('#password').value.trim();
+
+  // if (username && email && password) {
+  //   const response = await fetch('/api/users', {
+  //     method: 'post',
+  //     body: JSON.stringify({
+  //       username,
+  //       email,
+  //       password,
+  //     }),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   });
+  //   if (response.ok) {
+  //     document.location.replace('/dashboard');
+  //   } else {
+  //     alert(response.statusText);
+  //   }
+  // }
 
   if (username && email && password) {
-    // post the data to create a new user
-    const response = await fetch('api/users', {
+    const response = await fetch('/api/users', {
       method: 'post',
       body: JSON.stringify({
         username,
         email,
         password,
       }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
     });
+    //check response status
     if (response.ok) {
       document.location.replace('/dashboard');
     } else {
@@ -27,4 +44,6 @@ async function submitFormHandler(event) {
   }
 }
 
-$('#signup-form').on('submit', submitFormHandler);
+document
+  .querySelector('#signup-form')
+  .addEventListener('submit', signupFormHandler);
